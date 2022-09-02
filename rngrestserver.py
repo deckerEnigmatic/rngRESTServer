@@ -17,6 +17,7 @@ def rand_range(minval,maxval):
   proc=subprocess.Popen(oscmd, shell=True, stdout=subprocess.PIPE)
   y = proc.communicate()
   out=y[0].rstrip()
+  out=out.decode('utf-8')
   outjson = [{"value":out}]
   return outjson
 
@@ -24,8 +25,9 @@ def rand_float():
   myfloat = 'echo $(printf "%.19f" "0x0.$(od -N 8 -An -tx1 /dev/random | tr -d " ")")'
   proc=subprocess.Popen(myfloat, shell=True, stdout=subprocess.PIPE)
   y = proc.communicate()
-  print y
+  print(y)
   out=y[0].rstrip()
+  out=out.decode('utf-8')
   outjson = [{"value":out}]
   return outjson
 
